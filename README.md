@@ -25,6 +25,14 @@ docs/                  Verification checklist and browser evidence
 
 ## Controls
 
-The extension adds no custom up/down controls. It places only a flat timer at the top right. When auto-scroll is running, the extension itself advances to the next Reel when the active video ends, or after the Reel's duration; it uses a 9 second fallback when no video duration is available. It stops when the selected duration ends. On Mac, `Command + Shift + Up` and `Command + Shift + Down` can also be used for manual navigation.
+The extension adds no custom up/down controls. It places only a flat timer at the top right. When auto-scroll is running, the extension itself advances to the next Reel when the active video ends. It uses a 9 second fallback only when no active video is available. It stops when the selected duration ends. Clicking the timer opens the Scroll Reels popup.
 
 Instagram changes its page structure from time to time. If a site update changes how Reels respond to navigation, update `navigate` in `src/content.js`.
+
+## Documentation
+
+- [Product scope](docs/scope/scope.md) records the delivered feature and the remaining browser verification work.
+- [Automatic scrolling decision](docs/specs/0001-auto-scroll-lifecycle.md) records the session lifecycle and Reel advancement contract.
+- [Timer and popup decision](docs/specs/0002-timer-popup-controls.md) records the timer, popup, and visual interaction contract.
+- [Visual direction](design.md) is the source of truth for the flat four color theme.
+- [Verification checklist](docs/verify.md) separates reproducible automated checks from browser checks.

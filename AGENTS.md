@@ -24,12 +24,12 @@ Load the project folder with Chrome's Load unpacked action
 none required
 
 # Test
-node --test tests/reelflow.test.js
+node --test tests/scroll-reels.test.js
 ```
 
 ## Specs
 
-Verification steps live in `docs/verify.md`. The visual direction lives in `design.md`.
+The automatic scrolling decision lives in `docs/specs/0001-auto-scroll-lifecycle.md`. The timer and popup decision lives in `docs/specs/0002-timer-popup-controls.md`. Product scope lives in `docs/scope/scope.md`. Verification steps live in `docs/verify.md`. The visual direction lives in `design.md`.
 
 ## Rules
 
