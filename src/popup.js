@@ -22,6 +22,15 @@ function setStatus(status, remainingSeconds = 0) {
   countdown.textContent = running ? formatTime(remainingSeconds) : "--:--";
   startButton.disabled = running;
   stopButton.disabled = !running;
+  durationInput.disabled = running;
+  quickButtons.forEach((button) => {
+    button.disabled = running;
+  });
+}
+
+function syncQuickButtons() {
+  const selectedMinutes = Number(durationInput.value);
+  quickButtons.forEach((button) => button.classList.toggle("selected", Number(button.dataset.minutes) === selectedMinutes));
 }
 
 async function sendToPage(message) {
@@ -37,7 +46,10 @@ async function refreshStatus() {
   const response = await sendToPage({ type: "GET_STATUS" });
   if (!response) return;
   setStatus(response.running ? "running" : response.completed ? "complete" : "idle", response.remainingSeconds);
-  if (response.durationMinutes) durationInput.value = response.durationMinutes;
+  if (response.running && response.durationMinutes) {
+    durationInput.value = response.durationMinutes;
+    syncQuickButtons();
+  }
 }
 
 chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
@@ -47,20 +59,20 @@ chrome.tabs.query({ active: true, currentWindow: true }).then(([tab]) => {
 });
 
 durationInput.addEventListener("input", () => {
-  const value = Number(durationInput.value);
-  quickButtons.forEach((button) => button.classList.toggle("selected", Number(button.dataset.minutes) === value));
+  syncQuickButtons();
 });
 
 quickButtons.forEach((button) => {
   button.addEventListener("click", () => {
     durationInput.value = button.dataset.minutes;
-    quickButtons.forEach((item) => item.classList.toggle("selected", item === button));
+    syncQuickButtons();
   });
 });
 
 startButton.addEventListener("click", async () => {
   const minutes = Math.min(180, Math.max(1, Number(durationInput.value) || 10));
   durationInput.value = minutes;
+  syncQuickButtons();
   await sendToPage({ type: "START", minutes });
   await refreshStatus();
 });

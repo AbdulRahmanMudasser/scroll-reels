@@ -37,9 +37,9 @@ button { cursor: pointer; }
   border-radius: 10px;
   background: var(--white);
 }
-.brand-mark::before { content: ""; position: absolute; inset: 8px; border: 2px solid var(--blue); border-radius: 50%; }
+.brand-mark::before { content: ""; position: absolute; inset: 8px; border: 2px solid var(--black); border-radius: 50%; }
 .brand-mark span { position: absolute; width: 6px; height: 6px; right: 5px; top: 5px; background: var(--red); border-radius: 50%; }
-.eyebrow { margin: 0 0 3px; color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.eyebrow { margin: 0 0 3px; color: var(--black); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
 h1 { margin: 0; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
 
 .timer-section { margin-top: 28px; }
@@ -64,7 +64,7 @@ input {
   font-weight: 800;
   text-align: right;
 }
-input:focus { color: var(--blue); }
+input:focus { color: var(--black); }
 input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { appearance: none; margin: 0; }
 .duration-control span { color: var(--black); font-size: 11px; font-weight: 700; }
 
@@ -84,7 +84,7 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { appearance:
 .control-section { margin-top: 20px; }
 .primary-button, .secondary-button { width: 100%; border-radius: 7px; font-size: 13px; font-weight: 800; }
 .primary-button { height: 44px; border: 1px solid var(--black); background: var(--black); color: var(--white); }
-.primary-button:hover { border-color: var(--blue); background: var(--blue); }
+.primary-button:hover { border-color: var(--black); background: var(--black); }
 .secondary-button { height: 38px; margin-top: 8px; border: 1px solid var(--black); background: var(--white); color: var(--black); }
 .secondary-button:not(:disabled):hover { background: var(--black); color: var(--white); }
 .secondary-button:disabled { cursor: default; }
@@ -92,8 +92,8 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { appearance:
 .status-card { justify-content: space-between; margin-top: 18px; padding: 12px 14px; border: 1px solid var(--black); border-radius: 8px; }
 .status-label { gap: 8px; color: var(--black); font-size: 11px; font-weight: 700; }
 .status-ring { width: 8px; height: 8px; border: 1px solid var(--black); border-radius: 50%; }
-.status-card.running .status-ring { border-color: var(--blue); background: var(--blue); }
-.status-card.running #status-text { color: var(--blue); }
+.status-card.running .status-ring { border-color: var(--black); background: var(--black); }
+.status-card.running #status-text { color: var(--black); }
 .status-card strong { color: var(--black); font-size: 14px; font-variant-numeric: tabular-nums; }
 
-button:focus-visible, input:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }

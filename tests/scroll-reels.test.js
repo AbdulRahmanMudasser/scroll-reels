@@ -34,7 +34,9 @@ test("popup and floating controls use white surfaces with neutral actions", () =
   assert.match(popupStyles, /body \{[\s\S]*background: var\(--white\)/);
   assert.match(popupStyles, /\.primary-button[\s\S]*background: var\(--black\)/);
   assert.match(popupStyles, /\.secondary-button[\s\S]*border: 1px solid var\(--black\)/);
+  assert.doesNotMatch(popupStyles, /outline: 2px solid var\(--red\)|var\(--blue\)/);
   assert.match(contentStyles, /\.scroll-reels-meta \{[\s\S]*background: var\(--white\)/);
+  assert.doesNotMatch(contentStyles, /outline: 2px solid var\(--red\)|var\(--blue\)/);
 });
 
 test("popup exposes labelled controls and live status", () => {
@@ -136,4 +138,8 @@ test("popup sends bounded timer values to the page", () => {
   assert.match(popup, /Math\.min\(180, Math\.max\(1/);
   assert.match(popup, /type: "START"/);
   assert.match(popup, /type: "STOP"/);
+  assert.match(popup, /durationInput\.disabled = running/);
+  assert.match(popup, /button\.disabled = running/);
+  assert.match(popup, /if \(response\.running && response\.durationMinutes\)/);
+  assert.match(popup, /function syncQuickButtons\(\)/);
 });

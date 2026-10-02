@@ -27,14 +27,14 @@
   cursor: pointer;
   font: inherit;
 }
-.scroll-reels-meta:hover { border-color: var(--blue); }
+.scroll-reels-meta:hover { border-color: var(--black); }
 .scroll-reels-meta:focus-visible {
-  outline: 2px solid var(--red);
+  outline: 2px solid var(--black);
   outline-offset: 3px;
 }
 .scroll-reels-meta span { color: var(--black); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-.scroll-reels-meta strong { margin-top: 3px; color: var(--blue); font-size: 18px; line-height: 1; font-variant-numeric: tabular-nums; }
-.scroll-reels-meta.running strong { color: var(--blue); }
+.scroll-reels-meta strong { margin-top: 3px; color: var(--black); font-size: 18px; line-height: 1; font-variant-numeric: tabular-nums; }
+.scroll-reels-meta.running strong { color: var(--black); }
 .scroll-reels-meta.completed strong { color: var(--red); }
 
 @media (max-width: 900px) {
