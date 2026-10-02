@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Reels</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="brand-row">
+        <div class="brand-mark" aria-hidden="true"><span></span></div>
+        <div>
+          <p class="eyebrow">INSTAGRAM TOOL</p>
+          <h1>Scroll Reels</h1>
+        </div>
+      </header>
+
+      <section class="timer-section">
+        <div class="section-heading">
+          <label for="duration">Auto scroll for</label>
+          <span class="unit">MINUTES</span>
+        </div>
+        <div class="duration-row">
+          <input id="duration" type="number" min="1" max="180" step="1" value="10" />
+          <div class="quick-times" role="group" aria-label="Quick duration choices">
+            <button type="button" data-minutes="5">5m</button>
+            <button type="button" data-minutes="10" class="selected">10m</button>
+            <button type="button" data-minutes="30">30m</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-section">
+        <button id="start-button" class="primary-button" type="button">
+          <span class="play-icon" aria-hidden="true"></span>
+          Start auto scroll
+        </button>
+        <button id="stop-button" class="secondary-button" type="button" disabled>Stop scrolling</button>
+      </section>
+
+      <section class="status-card" aria-live="polite">
+        <div class="status-label"><span class="status-ring"></span><span id="status-text">Not running</span></div>
+        <strong id="countdown">--:--</strong>
+      </section>
+
+      <footer>
+        <span>Tip</span>
+        <p>Auto scroll is automatic. Instagram keeps its own Reel navigation.</p>
+      </footer>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
