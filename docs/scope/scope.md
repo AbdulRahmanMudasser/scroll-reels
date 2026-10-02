@@ -23,7 +23,7 @@ Done when: auto scrolling follows Instagram native navigation where available, a
 
 - [x] Design it: [spec 0001](../specs/0001-auto-scroll-lifecycle.md)
 - [x] Build it: automatic next Reel scheduling and timer lifecycle
-- [x] Test it: `node --test tests/scroll-reels.test.js`
+- [x] Test it: `npm test`
 - [ ] Verify it: `/check verify timed Reel navigation`
 
 ### 2. Flat timer controls · in-progress
@@ -34,7 +34,7 @@ Done when: the theme uses only black, white, red, and blue; no custom Reel direc
 
 - [x] Design it: [spec 0002](../specs/0002-timer-popup-controls.md)
 - [x] Build it: popup controls and timer to popup message path
-- [x] Test it: `node --test tests/scroll-reels.test.js`
+- [x] Test it: `npm test`
 - [ ] Verify it: `/check verify flat timer controls`
 
 ## Next verification slice

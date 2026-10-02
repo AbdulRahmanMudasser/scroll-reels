@@ -17,7 +17,7 @@ Scroll Reels automatically advances Instagram Reels for a selected session durat
 
 ## Decision
 
-Keep the lifecycle in `src/content.js`, close to the Instagram DOM it controls. `startAutoScroll` creates a countdown and schedules the next advancement. `stopAutoScroll` is the single cleanup path for completing and user requested stops.
+Keep the lifecycle in `entrypoints/content.ts`, close to the Instagram DOM it controls. `startAutoScroll` creates a countdown and schedules the next advancement. `stopAutoScroll` is the single cleanup path for completing and user requested stops.
 
 The navigation routine first looks for Instagram's native next Reel control across `button` and `[role="button"]` elements. When native control markup cannot be activated, it uses scrolling fallbacks. The page timer is status only and does not replace Instagram navigation.
 
@@ -37,5 +37,5 @@ Instagram can change its control markup without notice. The native lookup handle
 
 ## Verification
 
-- Run `node --test tests/scroll-reels.test.js`.
+- Run `npm test` and `npm run build`.
 - Follow the automatic advancement and expiry checks in [docs/verify.md](../verify.md).

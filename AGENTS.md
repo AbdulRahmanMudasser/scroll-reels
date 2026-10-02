@@ -2,10 +2,10 @@
 
 ## Stack
 
-- **Language / Runtime**: JavaScript, Chrome extension runtime, Node.js built in tests
-- **Framework**: Chrome Manifest V3
-- **Key dependencies**: Chrome extension APIs, Instagram page controls, Node `node:test`
-- **Package manager**: None required
+- **Language / Runtime**: TypeScript, Chrome extension runtime, Node.js
+- **Framework**: WXT with Chrome Manifest V3
+- **Key dependencies**: WXT, Vite, Vitest, Chrome extension APIs, Instagram page controls
+- **Package manager**: npm
 
 ## Build approach
 
@@ -18,13 +18,16 @@ Skateboard, keep the smallest complete extension usable, then improve reliabilit
 none required
 
 # Dev server
-Load the project folder with Chrome's Load unpacked action
+npm run dev
 
 # Build
-none required
+npm run build
 
 # Test
-node --test tests/scroll-reels.test.js
+npm test
+
+# Lint
+npm run lint
 ```
 
 ## Specs
@@ -33,13 +36,15 @@ The automatic scrolling decision lives in `docs/specs/0001-auto-scroll-lifecycle
 
 ## Rules
 
-- Use plain functions and `const` by default. Keep browser side effects at the edges.
-- Keep extension runtime files in `src/`, tests in `tests/`, and durable workflow docs in `docs/`.
-- Keep the manifest at the project root because Chrome loads it from the selected folder.
+- Use plain TypeScript functions and `const` by default. Keep browser side effects at the entrypoint edges.
+- Keep extension runtime files in `entrypoints/`, shared contracts in `utils/`, styles in `assets/styles/`, tests in `tests/`, and durable workflow docs in `docs/`.
+- Keep manifest configuration in `wxt.config.ts`; load Chrome from `.output/chrome-mv3` after a build.
 - Use Instagram's native Reel navigation controls first, then use the fallback navigation path.
 - The extension theme may use only black, white, red, and blue from the CSS token declarations.
 - Use semantic buttons, persistent labels, accessible names, and visible focus states.
 - Keep auto scrolling bounded by the selected timer and stop all timers when the run ends.
+- Use WXT content-script lifecycle timers and Shadow DOM UI helpers instead of unmanaged page injections.
+- Keep dependency versions ranged from the verified lockfile and run lint, type checking, tests, and the production build before handoff.
 - Use consistent naming and conventional commit messages if Git is added later.
 
 ## Agent skills

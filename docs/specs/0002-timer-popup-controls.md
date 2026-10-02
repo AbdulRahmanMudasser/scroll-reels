@@ -17,11 +17,11 @@ Scroll Reels provides one top right timer on Instagram and a compact extension p
 
 ## Decision
 
-The content script injects a single button styled as the timer card. Its click sends `OPEN_POPUP` to `src/background.js`. The service worker calls `chrome.action.openPopup` for the source tab's window.
+The content script injects a single button styled as the timer card. Its click sends `OPEN_POPUP` to `entrypoints/background.ts`. The service worker calls `browser.action.openPopup` for the source tab's window.
 
-The popup owns duration selection and sends `START` or `STOP` messages to the active Instagram tab. It polls the content script for session status so the countdown and action states reflect the automatic scrolling lifecycle.
+The popup owns duration selection and sends `START` or `STOP` messages to the active Instagram tab. It polls the content script for session status so the countdown and action states reflect the automatic scrolling lifecycle. Duration controls are disabled while a session runs, so a selected preset always matches the active session.
 
-`design.md`, `src/content.css`, and `src/popup.css` define the flat white surface, black default actions, blue running state, red focus and completed accents, and the strict four color palette.
+`design.md`, `assets/styles/content.css`, and `assets/styles/popup.css` define the flat white surface, black controls and running state, red completion accent, and the strict four color palette.
 
 ## Build plan
 
@@ -33,9 +33,9 @@ The popup owns duration selection and sends `START` or `STOP` messages to the ac
 
 ## Consequences
 
-Opening a popup from the timer requires a Chrome version that supports `chrome.action.openPopup`. The extension action icon remains an equivalent way to open the same controls when Chrome rejects the request.
+Opening a popup from the timer requires a Chrome version that supports `browser.action.openPopup`. The extension action icon remains an equivalent way to open the same controls when Chrome rejects the request.
 
 ## Verification
 
-- Run `node --test tests/scroll-reels.test.js`.
+- Run `npm test` and `npm run build`.
 - Follow the timer and popup checks in [docs/verify.md](../verify.md).

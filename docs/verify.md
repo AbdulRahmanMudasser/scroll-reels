@@ -4,12 +4,14 @@ This checklist covers the Chrome extension behavior on macOS and the four color 
 
 ## Automated checks
 
-- [x] `node --test tests/scroll-reels.test.js` passes (11 tests).
-- [x] `node --check src/popup.js && node --check src/content.js && node --check src/background.js` passes.
+- [x] `npm run check` passes.
+- [x] `npm run lint` passes.
+- [x] `npm test` passes.
+- [x] `npm run build` produces `.output/chrome-mv3/manifest.json`.
 
 ## Browser checks
 
-- [ ] Load the unpacked folder in Chrome at `chrome://extensions`.
+- [ ] Load `.output/chrome-mv3` as the unpacked extension in Chrome at `chrome://extensions`.
 - [ ] Refresh the open Instagram tab after loading the extension.
 - [ ] Open an Instagram Reel and confirm only the timer card appears at the top right.
 - [ ] Click the timer card and confirm the Scroll Reels popup opens in the same Chrome window.
@@ -24,7 +26,7 @@ This checklist covers the Chrome extension behavior on macOS and the four color 
 
 Date: 2026 10 03
 
-The automated suite passed with 11 tests, including the timer popup message path, automatic navigation scheduling, wall clock session timing, bounded duration values, four color theme, and the absence of custom up and down controls.
+The WXT migration passed ESLint, TypeScript checking, five Vitest tests for the shared message and timer session contracts, and the production Manifest V3 build. The generated manifest contains only the required tabs permission, Instagram host permission, popup, background service worker, and Instagram content script.
 
 The implementation supports Instagram controls exposed as either native buttons or elements with `role="button"`. It uses the native next Reel control first, then automatic wheel and scrolling fallbacks when Instagram changes its control markup.
 
