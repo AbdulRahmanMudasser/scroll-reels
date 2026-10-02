@@ -12,8 +12,7 @@
 * { box-sizing: border-box; }
 
 body {
-  width: 348px;
-  min-height: 500px;
+  width: 370px;
   margin: 0;
   background: var(--white);
   color: var(--black);
@@ -22,14 +21,14 @@ body {
 button, input { font: inherit; }
 button { cursor: pointer; }
 
-.popup-shell { padding: 22px 24px 20px; }
+.popup-shell { padding: 24px; }
 
-.brand-row, .duration-row, .section-heading, .status-label {
+.brand-row, .duration-row, .preset-row, .status-card, .status-label, .duration-control {
   display: flex;
   align-items: center;
 }
 
-.brand-row { gap: 11px; }
+.brand-row { gap: 12px; }
 .brand-mark {
   width: 36px;
   height: 36px;
@@ -38,69 +37,63 @@ button { cursor: pointer; }
   border-radius: 10px;
   background: var(--white);
 }
-.brand-mark::before { content: ""; position: absolute; inset: 7px; border: 2px solid var(--black); border-radius: 7px; }
-.brand-mark span { position: absolute; width: 6px; height: 6px; right: 6px; top: 6px; background: var(--red); border-radius: 50%; }
-.eyebrow { margin: 0 0 2px; color: var(--black); opacity: .6; font-size: 9px; font-weight: 800; letter-spacing: .14em; }
-h1 { margin: 0; font-size: 19px; letter-spacing: -.03em; }
+.brand-mark::before { content: ""; position: absolute; inset: 8px; border: 2px solid var(--blue); border-radius: 50%; }
+.brand-mark span { position: absolute; width: 6px; height: 6px; right: 5px; top: 5px; background: var(--red); border-radius: 50%; }
+.eyebrow { margin: 0 0 3px; color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+h1 { margin: 0; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
 
-.timer-section { margin-top: 30px; }
-.section-heading { justify-content: space-between; margin-bottom: 9px; }
-.section-heading label { color: var(--black); font-size: 12px; font-weight: 800; }
-.unit { color: var(--black); opacity: .6; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
-.duration-row { gap: 8px; }
+.timer-section { margin-top: 28px; }
+
+.timer-panel { overflow: hidden; border: 1px solid var(--black); border-radius: 10px; }
+.setting-row { padding: 15px 16px; }
+.setting-row + .setting-row { border-top: 1px solid var(--black); }
+.duration-row { justify-content: space-between; gap: 16px; }
+.preset-row { justify-content: space-between; gap: 14px; }
+.setting-copy label, .setting-label { color: var(--black); font-size: 13px; font-weight: 800; }
+.setting-copy p { margin: 4px 0 0; color: var(--black); font-size: 11px; line-height: 1.4; }
+
+.duration-control { width: 88px; height: 38px; justify-content: center; gap: 4px; border: 1px solid var(--black); border-radius: 7px; }
 input {
-  width: 88px;
-  height: 40px;
-  padding: 0 11px;
-  border: 1px solid var(--black);
-  border-radius: 7px;
+  width: 36px;
+  padding: 0;
+  border: 0;
   outline: none;
   background: var(--white);
   color: var(--black);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
+  text-align: right;
 }
-input:focus { border-color: var(--blue); }
+input:focus { color: var(--blue); }
+input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.duration-control span { color: var(--black); font-size: 11px; font-weight: 700; }
+
 .quick-times { display: grid; grid-template-columns: repeat(3, 1fr); flex: 1; gap: 6px; }
 .quick-times button {
-  height: 40px;
-  padding: 0 6px;
+  height: 34px;
+  padding: 0 4px;
   border: 1px solid var(--black);
-  border-radius: 7px;
+  border-radius: 6px;
   background: var(--white);
   color: var(--black);
   font-size: 10px;
   font-weight: 800;
 }
-.quick-times button.selected { border-color: var(--blue); background: var(--blue); color: var(--white); }
+.quick-times button.selected { border-color: var(--black); background: var(--black); color: var(--white); }
 
-.control-section { margin-top: 22px; }
-.primary-button, .secondary-button { width: 100%; border-radius: 7px; font-size: 12px; font-weight: 800; }
-.primary-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 42px;
-  border: 1px solid var(--blue);
-  background: var(--blue);
-  color: var(--white);
-}
-.primary-button:hover { background: var(--black); border-color: var(--black); }
-.play-icon { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid var(--white); }
-.secondary-button { height: 36px; margin-top: 9px; border: 1px solid var(--red); background: var(--white); color: var(--red); }
-.secondary-button:not(:disabled):hover { background: var(--red); color: var(--white); }
-.secondary-button:disabled { cursor: default; opacity: .35; }
+.control-section { margin-top: 20px; }
+.primary-button, .secondary-button { width: 100%; border-radius: 7px; font-size: 13px; font-weight: 800; }
+.primary-button { height: 44px; border: 1px solid var(--black); background: var(--black); color: var(--white); }
+.primary-button:hover { border-color: var(--blue); background: var(--blue); }
+.secondary-button { height: 38px; margin-top: 8px; border: 1px solid var(--black); background: var(--white); color: var(--black); }
+.secondary-button:not(:disabled):hover { background: var(--black); color: var(--white); }
+.secondary-button:disabled { cursor: default; }
 
-.status-card { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; padding: 12px 0; border-top: 1px solid var(--black); border-bottom: 1px solid var(--black); background: var(--white); }
-.status-label { gap: 8px; color: var(--black); opacity: .65; font-size: 11px; font-weight: 700; }
+.status-card { justify-content: space-between; margin-top: 18px; padding: 12px 14px; border: 1px solid var(--black); border-radius: 8px; }
+.status-label { gap: 8px; color: var(--black); font-size: 11px; font-weight: 700; }
 .status-ring { width: 8px; height: 8px; border: 1px solid var(--black); border-radius: 50%; }
 .status-card.running .status-ring { border-color: var(--blue); background: var(--blue); }
-.status-card.running #status-text { color: var(--blue); opacity: 1; }
+.status-card.running #status-text { color: var(--blue); }
 .status-card strong { color: var(--black); font-size: 14px; font-variant-numeric: tabular-nums; }
-
-footer { display: flex; align-items: baseline; gap: 10px; margin-top: 20px; }
-footer span { flex: 0 0 42px; color: var(--red); font-size: 10px; font-weight: 900; line-height: 1.45; }
-footer p { flex: 1; margin: 0; color: var(--black); opacity: .65; font-size: 10px; line-height: 1.45; }
 
 button:focus-visible, input:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
