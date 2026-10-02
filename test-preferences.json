@@ -1,9 +1,9 @@
 {
-  "tool": "node:test",
+  "tool": "vitest",
   "gate": null,
   "additionalTools": [],
   "e2eTool": "none",
   "testDir": "tests",
-  "filePattern": "*.test.js",
+  "filePattern": "*.test.ts",
   "packageManager": "npm"
 }

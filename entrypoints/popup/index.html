@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Reels</title>
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="brand-row">
+        <div class="brand-mark" aria-hidden="true"><span></span></div>
+        <div>
+          <p class="eyebrow">auto scroll</p>
+          <h1>Scroll Reels</h1>
+        </div>
+      </header>
+
+      <section class="timer-section" aria-label="Auto Scroll Settings">
+        <div class="timer-panel">
+          <div class="setting-row duration-row">
+            <div class="setting-copy">
+              <label for="duration">Duration</label>
+              <p>Stops automatically when the timer ends.</p>
+            </div>
+            <div class="duration-control">
+              <input id="duration" type="number" min="1" max="180" step="1" value="10" />
+              <span>min</span>
+            </div>
+          </div>
+          <div class="setting-row preset-row">
+            <span class="setting-label">Quick select</span>
+            <div class="quick-times" role="group" aria-label="Quick duration choices">
+              <button type="button" data-minutes="5">5 Min</button>
+              <button type="button" data-minutes="10" class="selected">10 Min</button>
+              <button type="button" data-minutes="30">30 Min</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-section">
+        <button id="start-button" class="primary-button" type="button">Start Auto Scroll</button>
+        <button id="stop-button" class="secondary-button" type="button" disabled>Stop Scrolling</button>
+      </section>
+
+      <section class="status-card" aria-live="polite">
+        <div class="status-label"><span class="status-ring"></span><span id="status-text">Not running</span></div>
+        <strong id="countdown">--:--</strong>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

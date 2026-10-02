@@ -1,0 +1,24 @@
+{
+  "name": "scroll-reels",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "prepare": "wxt prepare",
+    "test": "vitest run",
+    "check": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/chrome": "^0.3.4",
+    "eslint": "^10.12.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3",
+    "wxt": "^0.21.4"
+  }
+}
