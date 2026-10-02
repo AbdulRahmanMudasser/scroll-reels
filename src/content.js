@@ -1,12 +1,13 @@
 (() => {
   const AUTO_SCROLL_FALLBACK = 9000;
   const NAVIGATION_SETTLE_DELAY = 800;
-  const ROOT_ID = "reelflow-root";
+  const ROOT_ID = "scroll-reels-root";
   const state = {
     running: false,
     completed: false,
     durationMinutes: 10,
     remainingSeconds: 0,
+    sessionEndsAt: 0,
     isReelsPage: false,
     advanceId: null,
     timerId: null
@@ -38,9 +39,9 @@
   }
 
   function updateDock() {
-    const meta = document.querySelector(".reelflow-meta");
-    const label = document.querySelector(".reelflow-meta span");
-    const value = document.querySelector(".reelflow-meta strong");
+    const meta = document.querySelector(".scroll-reels-meta");
+    const label = document.querySelector(".scroll-reels-meta span");
+    const value = document.querySelector(".scroll-reels-meta strong");
     if (!meta || !label || !value) return;
     meta.classList.toggle("running", state.running);
     meta.classList.toggle("completed", state.completed && !state.running);
@@ -55,11 +56,18 @@
     state.timerId = null;
   }
 
+  function syncRemainingTime() {
+    if (!state.running) return state.remainingSeconds;
+    state.remainingSeconds = Math.max(0, Math.ceil((state.sessionEndsAt - Date.now()) / 1000));
+    return state.remainingSeconds;
+  }
+
   function stopAutoScroll(completed = false) {
     clearTimers();
     state.running = false;
     state.completed = completed;
     state.remainingSeconds = completed ? 0 : state.remainingSeconds;
+    state.sessionEndsAt = 0;
     updateDock();
   }
 
@@ -119,35 +127,60 @@
     return [...document.querySelectorAll("video")].find(isCurrentVideo) || null;
   }
 
+  function advanceToNextReel() {
+    window.clearTimeout(state.advanceId);
+    state.advanceId = null;
+    if (!state.running || syncRemainingTime() <= 0) {
+      if (state.running) stopAutoScroll(true);
+      return;
+    }
+
+    navigate(1);
+    state.advanceId = window.setTimeout(scheduleNextAdvance, NAVIGATION_SETTLE_DELAY);
+  }
+
   function scheduleNextAdvance() {
     window.clearTimeout(state.advanceId);
+    state.advanceId = null;
     if (!state.running) return;
 
     const video = getCurrentVideo();
-    const videoDuration = Number.isFinite(video?.duration) && video.duration > 0
-      ? Math.min(60000, Math.max(3000, video.duration * 1000 + 500))
-      : AUTO_SCROLL_FALLBACK;
+    if (!video) {
+      state.advanceId = window.setTimeout(advanceToNextReel, AUTO_SCROLL_FALLBACK);
+      return;
+    }
+
+    if (!Number.isFinite(video.duration) || video.duration <= 0) {
+      state.advanceId = window.setTimeout(scheduleNextAdvance, 1000);
+      return;
+    }
+
+    const remainingPlaybackMs = Math.max(1000, (video.duration - video.currentTime) * 1000 + 1000);
 
     state.advanceId = window.setTimeout(() => {
       if (!state.running) return;
-      navigate(1);
-      state.advanceId = window.setTimeout(scheduleNextAdvance, NAVIGATION_SETTLE_DELAY);
-    }, videoDuration);
+      const activeVideo = getCurrentVideo();
+      if (activeVideo === video && (video.ended || video.currentTime >= video.duration - 0.25)) {
+        advanceToNextReel();
+      } else {
+        scheduleNextAdvance();
+      }
+    }, remainingPlaybackMs);
   }
 
   function startAutoScroll(minutes) {
     if (!state.isReelsPage) return;
     clearTimers();
     state.durationMinutes = Math.min(180, Math.max(1, Number(minutes) || 10));
-    state.remainingSeconds = state.durationMinutes * 60;
     state.running = true;
     state.completed = false;
+    state.sessionEndsAt = Date.now() + state.durationMinutes * 60 * 1000;
+    syncRemainingTime();
     updateDock();
 
     scheduleNextAdvance();
     state.timerId = window.setInterval(() => {
-      state.remainingSeconds -= 1;
-      if (state.remainingSeconds <= 0) stopAutoScroll(true);
+      if (syncRemainingTime() <= 0) stopAutoScroll(true);
       else updateDock();
     }, 1000);
   }
@@ -158,9 +191,13 @@
     root.id = ROOT_ID;
     root.setAttribute("aria-label", "Scroll Reels timer");
     root.innerHTML = `
-      <div class="reelflow-dock">
-        <div class="reelflow-meta"><span>ready</span><strong>--:--</strong></div>
+      <div class="scroll-reels-dock">
+        <button type="button" class="scroll-reels-meta" aria-label="Open Scroll Reels controls" title="Open Scroll Reels controls"><span>ready</span><strong>--:--</strong></button>
       </div>`;
+    root.querySelector(".scroll-reels-meta").addEventListener("click", (event) => {
+      event.stopPropagation();
+      chrome.runtime.sendMessage({ type: "OPEN_POPUP" }).catch(() => {});
+    });
     document.documentElement.appendChild(root);
     updateDock();
     updatePageState();
@@ -170,16 +207,13 @@
     updatePageState();
     if (message.type === "START") startAutoScroll(message.minutes);
     if (message.type === "STOP") stopAutoScroll(false);
-    if (message.type === "NEXT") navigate(1);
-    if (message.type === "PREVIOUS") navigate(-1);
     sendResponse(getStatus());
     return true;
   });
 
   document.addEventListener("ended", (event) => {
     if (state.running && event.target instanceof HTMLVideoElement && isCurrentVideo(event.target) && Date.now() - lastNavigationAt > 1200) {
-      navigate(1);
-      state.advanceId = window.setTimeout(scheduleNextAdvance, NAVIGATION_SETTLE_DELAY);
+      advanceToNextReel();
     }
   }, true);
 

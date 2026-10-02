@@ -1,4 +1,4 @@
-#reelflow-root {
+#scroll-reels-root {
   all: initial;
   --white: #ffffff;
   --black: #000000;
@@ -12,9 +12,10 @@
   color: var(--black);
 }
 
-#reelflow-root * { box-sizing: border-box; }
-.reelflow-dock { display: flex; align-items: flex-start; }
-.reelflow-meta {
+#scroll-reels-root * { box-sizing: border-box; }
+.scroll-reels-dock { display: flex; align-items: flex-start; }
+.scroll-reels-meta {
+  appearance: none;
   display: grid;
   justify-items: center;
   min-width: 104px;
@@ -23,14 +24,21 @@
   border-radius: 7px;
   background: var(--white);
   color: var(--black);
+  cursor: pointer;
+  font: inherit;
 }
-.reelflow-meta span { color: var(--black); opacity: .65; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-.reelflow-meta strong { margin-top: 3px; color: var(--blue); font-size: 18px; line-height: 1; font-variant-numeric: tabular-nums; }
-.reelflow-meta.running strong { color: var(--blue); }
-.reelflow-meta.completed strong { color: var(--red); }
+.scroll-reels-meta:hover { border-color: var(--blue); }
+.scroll-reels-meta:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+.scroll-reels-meta span { color: var(--black); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.scroll-reels-meta strong { margin-top: 3px; color: var(--blue); font-size: 18px; line-height: 1; font-variant-numeric: tabular-nums; }
+.scroll-reels-meta.running strong { color: var(--blue); }
+.scroll-reels-meta.completed strong { color: var(--red); }
 
 @media (max-width: 900px) {
-  #reelflow-root { top: 15px; right: 15px; }
-  .reelflow-meta { min-width: 96px; padding: 7px 10px 8px; }
-  .reelflow-meta strong { font-size: 17px; }
+  #scroll-reels-root { top: 15px; right: 15px; }
+  .scroll-reels-meta { min-width: 96px; padding: 7px 10px 8px; }
+  .scroll-reels-meta strong { font-size: 17px; }
 }
