@@ -10,6 +10,10 @@ Scroll Reels is a compact, flat timer label for the Instagram Reels surface and 
 
 Use only black, white, red, and blue in the extension theme. White is the popup and timer surface. Black is the main text, border color, primary action, running state, hover state, and focus state. Red marks the logo dot and completed timer state. Do not add custom Reel up/down controls, drop shadows, elevations, offset-card effects, popup section headings, or a popup tip block.
 
+## Typography
+
+Use the locally bundled Inter variable font for popup and timer copy. Time values use tabular figures so their width stays stable as the countdown changes.
+
 ## Tokens
 
 The source of truth for color tokens is `assets/styles/popup.css` and `assets/styles/content.css`. Keep future visual changes in those token declarations instead of adding new color literals.

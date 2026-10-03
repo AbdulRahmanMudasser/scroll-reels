@@ -1,6 +1,16 @@
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("@fontsource-variable/inter/files/inter-latin-wght-normal.woff2") format("woff2-variations");
+}
+
 :root {
   color-scheme: light;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-optical-sizing: auto;
+  font-synthesis: none;
   --white: #ffffff;
   --black: #000000;
   --red: #ff0000;
@@ -18,8 +28,8 @@ button { cursor: pointer; }
 .brand-mark { width: 36px; height: 36px; position: relative; border: 2px solid var(--black); border-radius: 10px; background: var(--white); }
 .brand-mark::before { content: ""; position: absolute; inset: 8px; border: 2px solid var(--black); border-radius: 50%; }
 .brand-mark span { position: absolute; width: 6px; height: 6px; right: 5px; top: 5px; background: var(--red); border-radius: 50%; }
-.eyebrow { margin: 0 0 3px; color: var(--black); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
-h1 { margin: 0; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
+.eyebrow { margin: 0 0 4px; color: var(--black); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+h1 { margin: 0; font-size: 23px; font-weight: 720; letter-spacing: -.045em; line-height: 1; }
 .timer-section { margin-top: 28px; }
 .timer-panel { overflow: hidden; border: 1px solid var(--black); border-radius: 10px; }
 .setting-row { padding: 15px 16px; }
@@ -45,5 +55,5 @@ input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { appearance:
 .status-label { gap: 8px; color: var(--black); font-size: 11px; font-weight: 700; }
 .status-ring { width: 8px; height: 8px; border: 1px solid var(--black); border-radius: 50%; }
 .status-card.running .status-ring { background: var(--black); }
-.status-card strong { color: var(--black); font-size: 14px; font-variant-numeric: tabular-nums; }
+.status-card strong { color: var(--black); font-size: 15px; font-weight: 680; font-variant-numeric: tabular-nums; letter-spacing: -.025em; }
 button:focus-visible, input:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
